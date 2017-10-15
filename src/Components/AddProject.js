@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import uuid from 'uuid';
+import PropTypes from 'prop-types';
 
 class AddProject extends Component {
   constructor(){
@@ -17,14 +19,13 @@ class AddProject extends Component {
       alert('Put Title');
     } else {
       this.setState({newProject:{
+        id:uuid.v4(),
         title: this.refs.title.value,
         category: this.refs.category.value
       }}, function() {
         this.props.addproject(this.state.newProject);
       })
     }
-
-    console.log(this.refs.title.value);
 
     e.preventDefault();
   }
@@ -55,5 +56,11 @@ class AddProject extends Component {
     );
   }
 }
+
+AddProject.propTypes = {
+    categories:  PropTypes.array,
+    addproject: PropTypes.func
+}
+
 
 export default AddProject;
